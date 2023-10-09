@@ -1,26 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <component :is="currentView" />
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+  import { ref, computed } from 'vue';
+  import LoginPage from './pages/LoginPage.vue'
+  import MainPage from './pages/MainPage.vue'
+  import SubscribePage from './pages/SubscribePage.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  const routes = {
+      '/': MainPage,
+      'login': LoginPage,
+      'subscribe': SubscribePage
   }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  const currentPath = ref(window.location.pathname)
+
+  window.addEventListener('hashchange', () => {
+      currentPath.value = window.location.pathname
+  })
+
+  const currentView = computed(() => {
+      return routes[currentPath.value.slice(1) || '/']
+  })
+
+</script>
