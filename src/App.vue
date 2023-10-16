@@ -25,3 +25,14 @@
   })
 
 </script>
+
+<style>
+   body {
+        background-color: #a70000;
+        background-image: radial-gradient(#ffffff 0.5px, transparent 0.5px), radial-gradient(#ffffff 0.5px, #a70000 0.5px);
+        background-size: 15px 15px;
+        font-family: 'Autour One', cursive;
+        height: 100vh;  
+        overflow-y: hidden;
+    }
+</style>
