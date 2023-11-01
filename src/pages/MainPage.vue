@@ -3,10 +3,10 @@
         <div class="container">
             <div class="itens">
                 <div class="form-container">
-                    <input type="text" class="titulo" placeholder="Título da atividade">
-                    <input type="text" class="descricao" placeholder="Descrição">
+                    <input type="text" class="titulo" placeholder="Título da atividade" v-model="titulo">
+                    <input type="text" class="descricao" placeholder="Descrição" v-model="descricao">
                     <label for="diasemana">Dia da semana:</label>
-                    <select name="diasemana" id="">
+                    <select name="diasemana" id="" v-model="dia">
                         <option value="1">Segunda-feira</option>
                         <option value="2">Terça-feira</option>
                         <option value="3">Quarta-feira</option>
@@ -14,10 +14,10 @@
                         <option value="5">Sexta-feira</option>
                     </select>
                     <label for="diasemana">Horário inicial</label>
-                    <input type="time" class="horainicio">
+                    <input type="time" class="horainicio" v-model="inicio">
                     <label for="diasemana">Horário final</label>
-                    <input type="time" class="horafim">
-                    <button class="botao">Cadastrar</button>
+                    <input type="time" class="horafim" v-model="fim">
+                    <button class="botao" @click="adicionar">Cadastrar</button>
                 </div>
             </div>
 
@@ -150,9 +150,39 @@
     export default {
         name: "MainPage",
         components: {
-            ModalAtividade
+            ModalAtividade,
+            
+        },
+        data() {
+            return {
+                titulo: "",
+                descricao:"",
+                dia:"",
+                inicio:"",
+                fim:"",
+                listaAtividades: []
+            }
+        },       
+        
+
+        methods: {
+            adicionar() {
+                this.listaAtividades.push({
+                    titulo: this.titulo,
+                    descricao: this.descricao,
+                    dia: this.dia,
+                    inicio: this.inicio,
+                    fim: this.fim
+                });
+                console.log(this.listaAtividades)
+            }
+
         }
+
     }
+
+
+
 
 </script>
 
@@ -200,7 +230,7 @@
 
     th, .corzinha {
         background-color: rgb(192, 255, 255);
-    }
+}
 
     table {
         border-spacing: 0;
@@ -209,7 +239,7 @@
         border-radius: 1em;
     }
     .hora {
-        font-size: 0.56em;
+        font-size: 0.52em;
     }
 
 </style>

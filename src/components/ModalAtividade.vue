@@ -30,8 +30,8 @@
         bottom: 0;
         background-color: rgba(128, 128, 128, 0.5);
         display: flex;
-        /* opacity: 0;
-        display: none; */
+        opacity: 0;
+        display: none;
         transition: .3s;
         width: 100%;
         height: 100%;

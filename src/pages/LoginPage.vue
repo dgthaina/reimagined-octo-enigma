@@ -8,7 +8,7 @@
                 <div class="form-container">
                     <input type="text" class="siape" placeholder="SIAPE">
                     <input type="text" class="senha" placeholder="Senha">
-                    <button class="botao">Enviar</button>
+                    <button class="botao" @click='logar'>Enviar</button>
                 </div>
                 <div class="foto">
                     <img src="../assets/img/socorro.jpg" alt="" class="fotoperfil">
@@ -19,7 +19,14 @@
 </template>
 
 <script>
-
+    export default {
+            name: "LoginPage",
+            methods: {
+                logar() {
+                    window.location.href = "/";
+                }
+            }
+        }
 
 </script>
 

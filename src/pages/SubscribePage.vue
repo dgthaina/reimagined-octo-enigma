@@ -11,7 +11,7 @@
                     <input type="text" class="senha" placeholder="Senha">
                     <input type="text" class="carga" placeholder="Carga Horária">
                     <input type="text" class="email" placeholder="E-mail">
-                    <button class="botao">Enviar</button>
+                    <button class="botao" @click="cadastrar">Enviar</button>
                 </div>
                 <div class="foto">
                     <img src="../assets/img/socorro.jpg" alt="" class="fotoperfil">
@@ -22,9 +22,28 @@
 
 </template>
 
+
 <script>
-
-
+    export default {
+        name: "SubscribePage",
+        data() {
+            return {
+                carga: ""
+            }
+        },
+        methods: {
+            cadastrar() {
+                if (this.carga != 40 || this.carga != 20) {
+                    alert("Carga horária inválida!")
+                }
+                else {
+                    localStorage.setItem("cargahoraria", this.carga);
+                    window.location.href = "/login";
+                }
+                
+            }
+        }
+    }
 </script>
 
 <style scoped>
