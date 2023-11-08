@@ -9,7 +9,7 @@
                     <input type="text" class="nome" placeholder="Nome Completo">
                     <input type="text" class="siape" placeholder="SIAPE">
                     <input type="text" class="senha" placeholder="Senha">
-                    <input type="text" class="carga" placeholder="Carga Horária">
+                    <input type="text" class="carga" v-model="carga" placeholder="Carga Horária">
                     <input type="text" class="email" placeholder="E-mail">
                     <button class="botao" @click="cadastrar">Enviar</button>
                 </div>
@@ -33,7 +33,8 @@
         },
         methods: {
             cadastrar() {
-                if (this.carga != 40 || this.carga != 20) {
+                console.log(this.carga);
+                if (this.carga != 40 && this.carga != 20) {
                     alert("Carga horária inválida!")
                 }
                 else {

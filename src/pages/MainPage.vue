@@ -134,7 +134,6 @@
                             <td></td>
                             <td></td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>
@@ -167,22 +166,66 @@
 
         methods: {
             adicionar() {
+                if (parseInt(this.inicio.replace(':', '')) > parseInt(this.fim.replace(':', ''))) {
+                    alert('Ei amigo!!!!! Você está invertendo a ordem de seus horários. Verifique os dados e INTRODUZA novamente.')
+                    return
+                }
+
+                let atividadesDoDia = this.listaAtividades.filter((atividade) => atividade.dia == this.dia);
+                let minutosDeCadaAtividadeDoDia = atividadesDoDia.map((atividade) => {
+                    let minutoInicial = parseInt(atividade.inicio.replace(':', ''));
+                    let minutoFinal = parseInt(atividade.fim.replace(':', ''));
+                    
+                    let listaMinutos = [];
+
+                    for (
+                        let minuto = minutoInicial;
+                        minuto < minutoFinal;
+                        minuto++
+                        ) {
+                            listaMinutos.push(minuto);
+                    }
+
+                    return listaMinutos;
+                });
+
+                let minutosDaAtividade = []
+
+                let minutoInicial = parseInt(this.inicio.replace(':', ''));
+                let minutoFinal = parseInt(this.fim.replace(':', ''));
+
+                for (
+                    let minuto = minutoInicial;
+                    minuto < minutoFinal;
+                    minuto++
+                ) {
+                        minutosDaAtividade.push(minuto);
+                }
+
+                for (let minuto of minutosDaAtividade) {
+                    for (let minutos of minutosDeCadaAtividadeDoDia) {
+                        if (minuto in minutos) {
+                            alert('Ei amigo!!!!! Você está intercedendo a ordem de seus horários. Verifique os dados e introduza novamente.');
+                            return;
+                        }
+                    }
+                }
+
                 this.listaAtividades.push({
                     titulo: this.titulo,
                     descricao: this.descricao,
                     dia: this.dia,
                     inicio: this.inicio,
                     fim: this.fim
+
                 });
-                console.log(this.listaAtividades)
             }
+
+            
 
         }
 
     }
-
-
-
 
 </script>
 
