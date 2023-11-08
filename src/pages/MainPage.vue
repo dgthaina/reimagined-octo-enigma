@@ -40,7 +40,6 @@
                             <th>12 <br><span class="hora">19:50 - 20:40</span></th>
                             <th>13 <br><span class="hora">20:50 - 21:40</span></th>
                             <th>14 <br><span class="hora">21:40 - 22:30</span></th>
-
                         </tr>
                     </thead>
 
@@ -159,7 +158,13 @@
                 dia:"",
                 inicio:"",
                 fim:"",
-                listaAtividades: []
+                listaAtividades: [],
+                horariosPossiveisInicio: [
+                    730, 815, 900, 1000, 1045, 1330, 1415, 1500, 1600, 1645, 1900, 1950, 2050, 2140
+                ],
+                horariosPossiveisFim: [
+                    815, 900, 945, 1000, 1045, 1130, 1415, 1500, 1545, 1645, 1730, 1900, 1950, 2040, 2140, 2230
+                ]
             }
         },       
         
@@ -167,8 +172,13 @@
         methods: {
             adicionar() {
                 if (parseInt(this.inicio.replace(':', '')) > parseInt(this.fim.replace(':', ''))) {
-                    alert('Ei amigo!!!!! Você está invertendo a ordem de seus horários. Verifique os dados e INTRODUZA novamente.')
-                    return
+                    alert('Ei amigo!!!!! Você está invertendo a ordem de seus horários. Verifique os dados e INTRODUZA novamente.');
+                    return;
+                }
+
+                if (!(this.horariosPossiveisInicio.includes(parseInt(this.inicio.replace(':', ''))) || this.horariosPossiveisFim.includes(parseInt(this.fim.replace(':', ''))))) {
+                    alert('ATENÇÃO! Horário não permitido.');
+                    return;
                 }
 
                 let atividadesDoDia = this.listaAtividades.filter((atividade) => atividade.dia == this.dia);
@@ -204,7 +214,7 @@
 
                 for (let minuto of minutosDaAtividade) {
                     for (let minutos of minutosDeCadaAtividadeDoDia) {
-                        if (minuto in minutos) {
+                        if (minutos.includes(minuto)) {
                             alert('Ei amigo!!!!! Você está intercedendo a ordem de seus horários. Verifique os dados e introduza novamente.');
                             return;
                         }
@@ -217,12 +227,24 @@
                     dia: this.dia,
                     inicio: this.inicio,
                     fim: this.fim
-
                 });
+
+                let indexInicio = this.horariosPossiveisInicio.indexOf(parseInt(this.inicio.replace(':', ''))) + 2;
+                let indexFim = this.horariosPossiveisFim.indexOf(parseInt(this.fim.replace(':', ''))) + 1;
+                let indexes = [];
+
+                for (let i = indexInicio; i <= indexFim; i++) {
+                    indexes.push(i);
+                }
+
+                let elementos = []
+
+                indexes.forEach(e => {
+                    elementos.push(document.querySelector(`table tbody tr:nth-child(${this.dia}) td:nth-child(${e})`));
+                })
+
+                console.log(elementos);
             }
-
-            
-
         }
 
     }
