@@ -46,92 +46,92 @@
                     <tbody>
                         <tr>
                             <td class="corzinha">Seg</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
                         </tr>
 
                         <tr>
                             <td class="corzinha"> Ter</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
                         </tr>
 
                         <tr>
                             <td class="corzinha">Qua</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
                         </tr>
 
                         <tr>
                             <td class="corzinha">Qui</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
                         </tr>
 
                         <tr>
                             <td class="corzinha">Sex</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="editar($event)"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -140,37 +140,47 @@
         </div>
     </div>
 
-    <Modal-Atividade />
+    <div id="modal-timeline" class="modal">
+        <div id="modal-container">
+            <h3></h3>
+            <p></p>
+            <button id="close-modal" @click="sumir">Fechar</button>
+        </div>
+    </div>
 </template>
 
 <script>
-    import ModalAtividade from "../components/ModalAtividade.vue"
     export default {
         name: "MainPage",
-        components: {
-            ModalAtividade,
-            
-        },
         data() {
             return {
-                titulo: "",
-                descricao:"",
-                dia:"",
-                inicio:"",
-                fim:"",
+                titulo: "getulho vargas",
+                descricao: "pai dos pobres",
+                dia: "1",
+                inicio: "07:30",
+                fim: "08:15",
                 listaAtividades: [],
+                autoIncremento: 0,
                 horariosPossiveisInicio: [
                     730, 815, 900, 1000, 1045, 1330, 1415, 1500, 1600, 1645, 1900, 1950, 2050, 2140
                 ],
                 horariosPossiveisFim: [
-                    815, 900, 945, 1000, 1045, 1130, 1415, 1500, 1545, 1645, 1730, 1900, 1950, 2040, 2140, 2230
+                    815, 900, 945, 1045, 1130, 1415, 1500, 1545, 1645, 1730, 1950, 2040, 2140, 2230
                 ]
             }
         },       
         
+        mounted() {
+            console.log(this.listaAtividades);
+        },
 
         methods: {
             adicionar() {
+                if (!(this.dia) || !(this.titulo) || !(this.descricao)) { // if (condição não fake)
+                    alert('Olá parceiro!! Infelizmente você deve inserir todos os itens para que o sistema funcione :)');
+                    return;
+                }
+
                 if (parseInt(this.inicio.replace(':', '')) > parseInt(this.fim.replace(':', ''))) {
                     alert('Ei amigo!!!!! Você está invertendo a ordem de seus horários. Verifique os dados e INTRODUZA novamente.');
                     return;
@@ -209,7 +219,7 @@
                     minuto < minutoFinal;
                     minuto++
                 ) {
-                        minutosDaAtividade.push(minuto);
+                    minutosDaAtividade.push(minuto);
                 }
 
                 for (let minuto of minutosDaAtividade) {
@@ -221,7 +231,10 @@
                     }
                 }
 
+                this.autoIncremento++;
+
                 this.listaAtividades.push({
+                    id: this.autoIncremento,
                     titulo: this.titulo,
                     descricao: this.descricao,
                     dia: this.dia,
@@ -229,8 +242,13 @@
                     fim: this.fim
                 });
 
-                let indexInicio = this.horariosPossiveisInicio.indexOf(parseInt(this.inicio.replace(':', ''))) + 2;
-                let indexFim = this.horariosPossiveisFim.indexOf(parseInt(this.fim.replace(':', ''))) + 1;
+                this.desenhar(this.autoIncremento);
+            },
+            desenhar(idAtividade) {
+                let atividade = this.listaAtividades.find(a => a.id == idAtividade)
+
+                let indexInicio = this.horariosPossiveisInicio.indexOf(parseInt(atividade.inicio.replace(':', ''))) + 2;
+                let indexFim = this.horariosPossiveisFim.indexOf(parseInt(atividade.fim.replace(':', ''))) + 2;
                 let indexes = [];
 
                 for (let i = indexInicio; i <= indexFim; i++) {
@@ -240,13 +258,34 @@
                 let elementos = []
 
                 indexes.forEach(e => {
-                    elementos.push(document.querySelector(`table tbody tr:nth-child(${this.dia}) td:nth-child(${e})`));
-                })
+                    elementos.push(document.querySelector(`table tbody tr:nth-child(${atividade.dia}) td:nth-child(${e})`));
+                });
 
-                console.log(elementos);
+                for (let elemento of elementos) {
+                    elemento.textContent = atividade.titulo;
+                    elemento.classList.add('preenchido');
+                    elemento.classList.add(`atividade-${idAtividade}`);
+                }
+            },
+            editar(evento) {
+                let elementoClicado = evento.srcElement;
+
+                let classe = elementoClicado.classList.value.split(' ').find(c => (/^atividade-/).test(c));
+
+                if (classe == undefined) {
+                    return;
+                }
+
+                let idAtividade = classe.replace(/^atividade-(\d+)$/, "$1");
+
+                document.querySelector('.modal').style.display = 'flex';
+                document.querySelector('.modal h3').textContent = this.listaAtividades.find(a => a.id == idAtividade).titulo;
+                document.querySelector('.modal p').textContent = this.listaAtividades.find(a => a.id == idAtividade).descricao;
+            },
+            sumir() {
+                document.querySelector('.modal').style.display = 'none';
             }
-        }
-
+        }   
     }
 
 </script>
@@ -293,6 +332,15 @@
         text-align: center;
     }
 
+    .espaco {
+        font-size: 0.5em;
+    }
+
+    .preenchido {
+        background-color: rgb(213, 213, 213);
+        cursor: pointer;
+    }
+
     th, .corzinha {
         background-color: rgb(192, 255, 255);
 }
@@ -305,6 +353,46 @@
     }
     .hora {
         font-size: 0.52em;
+    }
+
+    #modal-timeline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(128, 128, 128, 0.5);
+        transition: .3s;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    #modal-timeline #modal-container {
+        top: 50%;
+        left: 50%;
+        background-color: white;
+        margin: 2em 15em;
+        padding: 0.5em;    
+        border: 0.5em #a70000 solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    #modal-timeline #modal-container p {
+        text-align: justify;
+        text-indent: 0.5em;
+        font-size: 0.9em;
+    }
+    #modal-timeline #modal-container button {
+        border: 0.1em black solid;
+        border-radius: 1em;
+        background-color: rgb(230, 230, 230);
+        padding: 0.5em;
+        margin-top: 1.5em;
     }
 
 </style>
