@@ -26,7 +26,7 @@
                     <thead>
                         <tr>
                             <th>Dia</th>
-                            <th>1 <br> <span class="hora">7:30 - 8:15</span></th>
+                            <th>1 <br><span class="hora">7:30 - 8:15</span></th>
                             <th>2 <br><span class="hora">8:15 - 9:00</span></th>
                             <th>3 <br><span class="hora">9:00 - 9:45</span></th>
                             <th>4 <br><span class="hora">10:00 - 10:45</span></th>
@@ -46,92 +46,92 @@
                     <tbody>
                         <tr>
                             <td class="corzinha">Seg</td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
                         </tr>
 
                         <tr>
                             <td class="corzinha"> Ter</td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
                         </tr>
 
                         <tr>
                             <td class="corzinha">Qua</td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
                         </tr>
 
                         <tr>
                             <td class="corzinha">Qui</td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
                         </tr>
 
                         <tr>
                             <td class="corzinha">Sex</td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
-                            <td class="espaco" @click="editar($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
+                            <td class="espaco" @click="abrirModal($event)"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -144,7 +144,16 @@
         <div id="modal-container">
             <h3></h3>
             <p></p>
-            <button id="close-modal" @click="sumir">Fechar</button>
+            <h4>Editar</h4>
+            <label for="titulo">Título</label>
+            <input type="text" name="titulo">
+            <label for="descricao">Descrição</label>
+            <textarea name="descricao" cols="30" rows="10"></textarea>
+            <div class="botoes">
+                <button @click="editar">Salvar</button>
+                <button @click="sumir">Fechar</button>
+                <button @click="excluir">Excluir</button>
+            </div>
         </div>
     </div>
 </template>
@@ -159,6 +168,7 @@
                 dia: "1",
                 inicio: "07:30",
                 fim: "08:15",
+                atividadeSelecionada: "",
                 listaAtividades: [],
                 autoIncremento: 0,
                 horariosPossiveisInicio: [
@@ -267,7 +277,7 @@
                     elemento.classList.add(`atividade-${idAtividade}`);
                 }
             },
-            editar(evento) {
+            abrirModal(evento) {
                 let elementoClicado = evento.srcElement;
 
                 let classe = elementoClicado.classList.value.split(' ').find(c => (/^atividade-/).test(c));
@@ -278,12 +288,28 @@
 
                 let idAtividade = classe.replace(/^atividade-(\d+)$/, "$1");
 
+                this.atividadeSelecionada = idAtividade;
+
                 document.querySelector('.modal').style.display = 'flex';
-                document.querySelector('.modal h3').textContent = this.listaAtividades.find(a => a.id == idAtividade).titulo;
-                document.querySelector('.modal p').textContent = this.listaAtividades.find(a => a.id == idAtividade).descricao;
+                document.querySelector('.modal h3').textContent = 'Título: ' + this.listaAtividades.find(a => a.id == idAtividade).titulo;
+                document.querySelector('.modal p').textContent = 'Descrição: ' + this.listaAtividades.find(a => a.id == idAtividade).descricao;
             },
             sumir() {
                 document.querySelector('.modal').style.display = 'none';
+            },
+            editar() {
+                let atividade = this.listaAtividades.find(a => a.id == this.atividadeSelecionada);
+                atividade.titulo = document.getElementsByName('titulo')[0].value;
+                atividade.descricao = document.getElementsByName('descricao')[0].value;
+                document.getElementsByName('titulo')[0].value = "";
+                document.getElementsByName('descricao')[0].value = "";
+                this.sumir();
+                this.desenhar(this.atividadeSelecionada);
+            },
+            excluir() {
+                if (!(confirm('O (a) senhor(a) tem certeza que deseja excluir a atividade?'))){
+                    return
+                }
             }
         }   
     }
@@ -370,6 +396,7 @@
         justify-content: center;
         display: none;
     }
+
     #modal-timeline #modal-container {
         top: 50%;
         left: 50%;
@@ -382,11 +409,24 @@
         justify-content: center;
         flex-direction: column;
     }
+
     #modal-timeline #modal-container p {
         text-align: justify;
         text-indent: 0.5em;
         font-size: 0.9em;
     }
+
+    #modal-timeline #modal-container .botoes {
+        display: flex;
+        justify-content: center;
+        gap: 0.2em;
+    }
+
+    #modal-timeline #modal-container .botoes button:first-child {
+        background-color: #a70000;
+        color: white;
+    }
+
     #modal-timeline #modal-container button {
         border: 0.1em black solid;
         border-radius: 1em;
@@ -394,5 +434,4 @@
         padding: 0.5em;
         margin-top: 1.5em;
     }
-
 </style>
