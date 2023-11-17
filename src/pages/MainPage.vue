@@ -21,6 +21,14 @@
                 </div>
             </div>
 
+            <div class="contagem">
+                <p>Carga horária devida: {{ cargaDevida }}</p>
+                <p>Carga horária cumprida: {{ contarCarga() }}</p>
+                <p style="color: green;" v-show="cargaDevida == contarCarga()">Situação: Ok.</p>
+                <p style="color: red;" v-show="cargaDevida < contarCarga()">Situação: Carga excedente de {{ contarCarga() - cargaDevida }} horas.</p>
+                <p style="color: red;" v-show="cargaDevida > contarCarga()">Situação: Carga insuficiente: cumpra mais {{ cargaDevida - contarCarga() }} horas.</p>
+            </div>
+
             <div class="quadro">
                 <table>
                     <thead>
@@ -163,14 +171,15 @@
         name: "MainPage",
         data() {
             return {
-                titulo: "getulho vargas",
-                descricao: "pai dos pobres",
+                titulo: "",
+                descricao: "",
                 dia: "1",
-                inicio: "07:30",
-                fim: "08:15",
+                inicio: "",
+                fim: "",
                 atividadeSelecionada: "",
                 listaAtividades: [],
                 autoIncremento: 0,
+                cargaDevida: localStorage['cargahoraria'],
                 horariosPossiveisInicio: [
                     730, 815, 900, 1000, 1045, 1330, 1415, 1500, 1600, 1645, 1900, 1950, 2050, 2140
                 ],
@@ -179,9 +188,12 @@
                 ]
             }
         },       
-        
-        mounted() {
-            console.log(this.listaAtividades);
+
+        beforeMount () {
+            if (localStorage.getItem('cargahoraria') == undefined) {
+                alert('ATENÇÃO! Realize seu cadastro antes de acessar o quadro.');
+                window.location.href = '/subscribe';
+            }
         },
 
         methods: {
@@ -255,7 +267,7 @@
                 this.desenhar(this.autoIncremento);
             },
             desenhar(idAtividade) {
-                let atividade = this.listaAtividades.find(a => a.id == idAtividade)
+                let atividade = this.listaAtividades.find(a => a != undefined && a.id == idAtividade);
 
                 let indexInicio = this.horariosPossiveisInicio.indexOf(parseInt(atividade.inicio.replace(':', ''))) + 2;
                 let indexFim = this.horariosPossiveisFim.indexOf(parseInt(atividade.fim.replace(':', ''))) + 2;
@@ -277,6 +289,29 @@
                     elemento.classList.add(`atividade-${idAtividade}`);
                 }
             },
+            apagar(idAtividade) {
+                let atividade = this.listaAtividades.find(a => a != undefined && a.id == idAtividade);
+
+                let indexInicio = this.horariosPossiveisInicio.indexOf(parseInt(atividade.inicio.replace(':', ''))) + 2;
+                let indexFim = this.horariosPossiveisFim.indexOf(parseInt(atividade.fim.replace(':', ''))) + 2;
+                let indexes = [];
+
+                for (let i = indexInicio; i <= indexFim; i++) {
+                    indexes.push(i);
+                }
+
+                let elementos = []
+
+                indexes.forEach(e => {
+                    elementos.push(document.querySelector(`table tbody tr:nth-child(${atividade.dia}) td:nth-child(${e})`));
+                });
+
+                for (let elemento of elementos) {
+                    elemento.textContent = "";
+                    elemento.classList.remove('preenchido');
+                    elemento.classList.remove(`atividade-${idAtividade}`);
+                }
+            },
             abrirModal(evento) {
                 let elementoClicado = evento.srcElement;
 
@@ -291,14 +326,14 @@
                 this.atividadeSelecionada = idAtividade;
 
                 document.querySelector('.modal').style.display = 'flex';
-                document.querySelector('.modal h3').textContent = 'Título: ' + this.listaAtividades.find(a => a.id == idAtividade).titulo;
-                document.querySelector('.modal p').textContent = 'Descrição: ' + this.listaAtividades.find(a => a.id == idAtividade).descricao;
+                document.querySelector('.modal h3').textContent = 'Título: ' + this.listaAtividades.find(a => a != undefined && a.id == idAtividade).titulo;
+                document.querySelector('.modal p').textContent = 'Descrição: ' + this.listaAtividades.find(a => a != undefined && a.id == idAtividade).descricao;
             },
             sumir() {
                 document.querySelector('.modal').style.display = 'none';
             },
             editar() {
-                let atividade = this.listaAtividades.find(a => a.id == this.atividadeSelecionada);
+                let atividade = this.listaAtividades.find(a => a != undefined && a.id == this.atividadeSelecionada);
                 atividade.titulo = document.getElementsByName('titulo')[0].value;
                 atividade.descricao = document.getElementsByName('descricao')[0].value;
                 document.getElementsByName('titulo')[0].value = "";
@@ -308,8 +343,35 @@
             },
             excluir() {
                 if (!(confirm('O (a) senhor(a) tem certeza que deseja excluir a atividade?'))){
-                    return
+                    return;
                 }
+
+                this.sumir();
+                this.apagar(this.atividadeSelecionada);
+
+                delete this.listaAtividades[this.listaAtividades.indexOf(this.listaAtividades.find(a => a != undefined && a.id == this.atividadeSelecionada))];
+            },
+            contarCarga() {
+
+                let horasCumpridasSemanalmente = 0;
+
+                this.listaAtividades.forEach(atividade => {
+                    // let inicio = parseInt(atividade.inicio.replace(':', ''));
+                    // let fim = parseInt(atividade.fim.replace(':', ''));
+
+                    let [horaInicio, minutoInicio] = atividade.inicio.split(':').map(n => parseInt(n));
+                    let [horaFim, minutoFim] = atividade.fim.split(':').map(n => parseInt(n));
+
+                    let minutosInicio = horaInicio * 60 + minutoInicio;
+                    let minutosFim = horaFim * 60 + minutoFim;
+
+                    console.log(minutosInicio);
+                    console.log(minutosFim);
+
+                    horasCumpridasSemanalmente += (minutosFim - minutosInicio) / 60;
+                });
+
+                return horasCumpridasSemanalmente;
             }
         }   
     }
@@ -434,4 +496,15 @@
         padding: 0.5em;
         margin-top: 1.5em;
     }
+
+    .contagem {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: white;
+        margin-top: 1em;
+        padding-block: 0.2em;
+        padding-inline: 2em; 
+    }
+
 </style>
