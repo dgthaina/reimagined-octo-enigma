@@ -1,216 +1,221 @@
 <template>
     <div class="container-maior">
         <div class="container">
-            <div class="itens">
-                <div class="form-container">
-                    <input type="text" class="titulo" placeholder="Título da atividade" v-model="titulo">
-                    <input type="text" class="descricao" placeholder="Descrição" v-model="descricao">
-                    <label for="diasemana">Dia da semana:</label>
-                    <select name="diasemana" id="" v-model="dia">
-                        <option value="1">Segunda-feira</option>
-                        <option value="2">Terça-feira</option>
-                        <option value="3">Quarta-feira</option>
-                        <option value="4">Quinta-feira</option>
-                        <option value="5">Sexta-feira</option>
-                    </select>
-                    <label for="diasemana">Horário inicial</label>
-                    <input type="time" class="horainicio" v-model="inicio">
-                    <label for="diasemana">Horário final</label>
-                    <input type="time" class="horafim" v-model="fim">
-                    <button class="botao" @click="adicionar">Cadastrar</button>
+                <div class="itens">
+                    <div class="form-container">
+                        <input type="text" class="titulo" placeholder="Título da atividade" v-model="titulo">
+                        <input type="text" class="descricao" placeholder="Descrição" v-model="descricao">
+                        <div style="display: flex; justify-content: center;">
+                            <label for="diariamente">Repetir diariamente</label>
+                            <input style="width: 1.5em;" type="checkbox" name="diariamente" v-model="diariamente">
+                        </div>
+                        <label v-show="!diariamente" for="diasemana">Dia da semana:</label>
+                        <select v-show="!diariamente" name="diasemana" id="" v-model="dia">
+                            <option value="1">Segunda-feira</option>
+                            <option value="2">Terça-feira</option>
+                            <option value="3">Quarta-feira</option>
+                            <option value="4">Quinta-feira</option>
+                            <option value="5">Sexta-feira</option>
+                        </select>
+                        <label>Horário inicial</label>
+                        <input type="time" class="horainicio" v-model="inicio">
+                        <label>Horário final</label>
+                        <input type="time" class="horafim" v-model="fim">
+                        <button class="botao" @click="adicionar">Cadastrar</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 2em; font-size: 1em; border-radius: 1em; border: 2px black solid;" class="contagem">
+                    <p>Carga horária devida: {{ cargaDevida }}</p>
+                    <p>Carga horária cumprida: {{ contarCarga() }}</p>
+                    <p style="color: green;" v-show="cargaDevida == contarCarga()">Situação: Ok.</p>
+                    <p style="color: red;" v-show="cargaDevida < contarCarga()">Situação: Carga excedente de {{ contarCarga() - cargaDevida }} horas.</p>
+                    <p style="color: red;" v-show="cargaDevida > contarCarga()">Situação: Carga insuficiente: cumpra mais {{ cargaDevida - contarCarga() }} horas.</p>
+                </div>
+
+                <div class="quadro">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dia</th>
+                                <th>1 <br><span class="hora">7:30 - 8:15</span></th>
+                                <th>2 <br><span class="hora">8:15 - 9:00</span></th>
+                                <th>3 <br><span class="hora">9:00 - 9:45</span></th>
+                                <th>4 <br><span class="hora">10:00 - 10:45</span></th>
+                                <th>5 <br><span class="hora">10:45 - 11:30</span></th>
+                                <th>6 <br><span class="hora">13:30 - 14:15</span></th>
+                                <th>7 <br><span class="hora">14:15 - 15:00</span></th>
+                                <th>8 <br><span class="hora">15:00 - 15:45</span></th>
+                                <th>9 <br><span class="hora">16:00 - 16:45</span></th>
+                                <th>10 <br><span class="hora">16:45 - 17:30</span></th>
+                                <th>11 <br><span class="hora">19:00 - 19:50</span></th>
+                                <th>12 <br><span class="hora">19:50 - 20:40</span></th>
+                                <th>13 <br><span class="hora">20:50 - 21:40</span></th>
+                                <th>14 <br><span class="hora">21:40 - 22:30</span></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="corzinha">Seg</td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="corzinha"> Ter</td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="corzinha">Qua</td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="corzinha">Qui</td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="corzinha">Sex</td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                                <td class="espaco" @click="abrirModal($event)"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="modal-timeline" class="modal">
+            <div id="modal-container">
+                <h3></h3>
+                <p></p>
+                <h4>Editar</h4>
+                <label for="titulo">Título</label>
+                <input type="text" name="titulo">
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" cols="30" rows="10"></textarea>
+                <div class="botoes">
+                    <button @click="editar">Salvar</button>
+                    <button @click="sumir">Fechar</button>
+                    <button @click="excluir">Excluir</button>
                 </div>
             </div>
-
-            <div class="contagem">
-                <p>Carga horária devida: {{ cargaDevida }}</p>
-                <p>Carga horária cumprida: {{ contarCarga() }}</p>
-                <p style="color: green;" v-show="cargaDevida == contarCarga()">Situação: Ok.</p>
-                <p style="color: red;" v-show="cargaDevida < contarCarga()">Situação: Carga excedente de {{ contarCarga() - cargaDevida }} horas.</p>
-                <p style="color: red;" v-show="cargaDevida > contarCarga()">Situação: Carga insuficiente: cumpra mais {{ cargaDevida - contarCarga() }} horas.</p>
-            </div>
-
-            <div class="quadro">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Dia</th>
-                            <th>1 <br><span class="hora">7:30 - 8:15</span></th>
-                            <th>2 <br><span class="hora">8:15 - 9:00</span></th>
-                            <th>3 <br><span class="hora">9:00 - 9:45</span></th>
-                            <th>4 <br><span class="hora">10:00 - 10:45</span></th>
-                            <th>5 <br><span class="hora">10:45 - 11:30</span></th>
-                            <th>6 <br><span class="hora">13:30 - 14:15</span></th>
-                            <th>7 <br><span class="hora">14:15 - 15:00</span></th>
-                            <th>8 <br><span class="hora">15:00 - 15:45</span></th>
-                            <th>9 <br><span class="hora">16:00 - 16:45</span></th>
-                            <th>10 <br><span class="hora">16:45 - 17:30</span></th>
-                            <th>11 <br><span class="hora">19:00 - 19:50</span></th>
-                            <th>12 <br><span class="hora">19:50 - 20:40</span></th>
-                            <th>13 <br><span class="hora">20:50 - 21:40</span></th>
-                            <th>14 <br><span class="hora">21:40 - 22:30</span></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td class="corzinha">Seg</td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="corzinha"> Ter</td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="corzinha">Qua</td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="corzinha">Qui</td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="corzinha">Sex</td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                            <td class="espaco" @click="abrirModal($event)"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
-    </div>
+    </template>
 
-    <div id="modal-timeline" class="modal">
-        <div id="modal-container">
-            <h3></h3>
-            <p></p>
-            <h4>Editar</h4>
-            <label for="titulo">Título</label>
-            <input type="text" name="titulo">
-            <label for="descricao">Descrição</label>
-            <textarea name="descricao" cols="30" rows="10"></textarea>
-            <div class="botoes">
-                <button @click="editar">Salvar</button>
-                <button @click="sumir">Fechar</button>
-                <button @click="excluir">Excluir</button>
-            </div>
-        </div>
-    </div>
-</template>
-
-<script>
-    export default {
-        name: "MainPage",
-        data() {
-            return {
-                titulo: "",
-                descricao: "",
-                dia: "1",
-                inicio: "",
-                fim: "",
-                atividadeSelecionada: "",
-                listaAtividades: [],
-                autoIncremento: 0,
-                cargaDevida: localStorage['cargahoraria'],
-                horariosPossiveisInicio: [
-                    730, 815, 900, 1000, 1045, 1330, 1415, 1500, 1600, 1645, 1900, 1950, 2050, 2140
-                ],
-                horariosPossiveisFim: [
-                    815, 900, 945, 1045, 1130, 1415, 1500, 1545, 1645, 1730, 1950, 2040, 2140, 2230
-                ]
-            }
-        },       
-
-        beforeMount () {
-            if (localStorage.getItem('cargahoraria') == undefined) {
-                alert('ATENÇÃO! Realize seu cadastro antes de acessar o quadro.');
-                window.location.href = '/subscribe';
-            }
-        },
-
-        methods: {
-            adicionar() {
-                if (!(this.dia) || !(this.titulo) || !(this.descricao)) { // if (condição não fake)
-                    alert('Olá parceiro!! Infelizmente você deve inserir todos os itens para que o sistema funcione :)');
-                    return;
+    <script>
+        export default {
+            name: "MainPage",
+            data() {
+                return {
+                    titulo: "",
+                    descricao: "",
+                    dia: "1",
+                    inicio: "",
+                    fim: "",
+                    diariamente: "",
+                    atividadeSelecionada: "",
+                    listaAtividades: [],
+                    autoIncremento: 0,
+                    cargaDevida: localStorage['cargahoraria'],
+                    horariosPossiveisInicio: [
+                        730, 815, 900, 1000, 1045, 1330, 1415, 1500, 1600, 1645, 1900, 1950, 2050, 2140
+                    ],
+                    horariosPossiveisFim: [
+                        815, 900, 945, 1045, 1130, 1415, 1500, 1545, 1645, 1730, 1950, 2040, 2140, 2230
+                    ]
                 }
+            },       
 
-                if (parseInt(this.inicio.replace(':', '')) > parseInt(this.fim.replace(':', ''))) {
-                    alert('Ei amigo!!!!! Você está invertendo a ordem de seus horários. Verifique os dados e INTRODUZA novamente.');
-                    return;
+            beforeMount () {
+                if (localStorage.getItem('cargahoraria') == undefined) {
+                    alert('ATENÇÃO! Realize seu cadastro antes de acessar o quadro.');
+                    window.location.href = '/subscribe';
                 }
+            },
 
-                if (!(this.horariosPossiveisInicio.includes(parseInt(this.inicio.replace(':', ''))) || this.horariosPossiveisFim.includes(parseInt(this.fim.replace(':', ''))))) {
-                    alert('ATENÇÃO! Horário não permitido.');
-                    return;
+            methods: {
+                adicionar() {
+                    if (!(this.dia) || !(this.titulo) || !(this.descricao)) { // if (condição não fake)
+                        alert('Olá parceiro!! Infelizmente você deve inserir todos os itens para que o sistema funcione :)');
+                        return;
+                    }
+
+                    if (parseInt(this.inicio.replace(':', '')) > parseInt(this.fim.replace(':', ''))) {
+                        alert('Ei amigo!!!!! Você está invertendo a ordem de seus horários. Verifique os dados e INTRODUZA novamente.');
+                        return;
+                    }
+
+                    if (!(this.horariosPossiveisInicio.includes(parseInt(this.inicio.replace(':', ''))) || this.horariosPossiveisFim.includes(parseInt(this.fim.replace(':', ''))))) {
+                        alert('ATENÇÃO! Horário não permitido.');
+                        return;
                 }
 
                 let atividadesDoDia = this.listaAtividades.filter((atividade) => atividade.dia == this.dia);
@@ -261,7 +266,8 @@
                     descricao: this.descricao,
                     dia: this.dia,
                     inicio: this.inicio,
-                    fim: this.fim
+                    fim: this.fim,
+                    diariamente: this.diariamente
                 });
 
                 this.desenhar(this.autoIncremento);
@@ -279,9 +285,18 @@
 
                 let elementos = []
 
-                indexes.forEach(e => {
-                    elementos.push(document.querySelector(`table tbody tr:nth-child(${atividade.dia}) td:nth-child(${e})`));
-                });
+                if (atividade.diariamente) {
+                    for (let dia = 1; dia <= 5; dia++) {
+                        indexes.forEach(e => {
+                            elementos.push(document.querySelector(`table tbody tr:nth-child(${dia}) td:nth-child(${e})`));
+                        });
+                    }
+                } else {
+                    indexes.forEach(e => {
+                        elementos.push(document.querySelector(`table tbody tr:nth-child(${atividade.dia}) td:nth-child(${e})`));
+                    });
+                }
+                
 
                 for (let elemento of elementos) {
                     elemento.textContent = atividade.titulo;
@@ -302,9 +317,17 @@
 
                 let elementos = []
 
-                indexes.forEach(e => {
-                    elementos.push(document.querySelector(`table tbody tr:nth-child(${atividade.dia}) td:nth-child(${e})`));
-                });
+                if (atividade.diariamente) {
+                    for (let dia = 1; dia <= 5; dia++) {
+                        indexes.forEach(e => {
+                            elementos.push(document.querySelector(`table tbody tr:nth-child(${dia}) td:nth-child(${e})`));
+                        });
+                    }
+                } else {
+                    indexes.forEach(e => {
+                        elementos.push(document.querySelector(`table tbody tr:nth-child(${atividade.dia}) td:nth-child(${e})`));
+                    });
+                }
 
                 for (let elemento of elementos) {
                     elemento.textContent = "";
