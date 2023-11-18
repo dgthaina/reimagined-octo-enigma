@@ -4,13 +4,14 @@
             <div class="frase">
                 <h1>oiiiiiiiiiiiiiii bem vindo</h1>
             </div>
-            <div class="itens">
+            <div class="itens"> <!-- Campos -->
                 <div class="form-container">
                     <input type="text" class="nome" placeholder="Nome Completo">
                     <input type="text" class="siape" placeholder="SIAPE">
                     <input type="text" class="senha" placeholder="Senha">
-                    <input type="text" class="carga" v-model="carga" placeholder="Carga Horária">
+                    <input type="text" class="carga" v-model="carga" placeholder="Carga Horária"> <!-- Carga horária ligada a uma variável do "model" -->
                     <input type="text" class="email" placeholder="E-mail">
+                    
                     <button class="botao" @click="cadastrar">Enviar</button>
                 </div>
                 <div class="foto">
@@ -33,13 +34,14 @@
         },
         methods: {
             cadastrar() {
-                console.log(this.carga);
                 if (this.carga != 40 && this.carga != 20) {
                     alert("Carga horária inválida!")
+                    /* Regra de negócio: apenas se permite a carga de 20 ou 40 horas */
                 }
                 else {
                     localStorage.setItem("cargahoraria", this.carga);
                     window.location.href = "/login";
+                    /* Redirecionar usuário para página de login */
                 }
                 
             }

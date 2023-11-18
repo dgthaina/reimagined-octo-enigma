@@ -24,6 +24,7 @@
             methods: {
                 logar() {
                     window.location.href = "/";
+                    /* Redirecionar usuário para página do quadro de horários */
                 }
             }
         }

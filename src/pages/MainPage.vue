@@ -2,13 +2,20 @@
     <div class="container-maior">
         <div class="container">
                 <div class="itens">
-                    <div class="form-container">
+                    <div class="form-container"> <!-- Campos de inserção - todos ligados com a diretiva v-model -->
+                        <!-- Título -->
                         <input type="text" class="titulo" placeholder="Título da atividade" v-model="titulo">
+                        <!-- Descrição -->
                         <input type="text" class="descricao" placeholder="Descrição" v-model="descricao">
+                        <!-- Periodicidade -->
                         <div style="display: flex; justify-content: center;">
                             <label for="diariamente">Repetir diariamente</label>
                             <input style="width: 1.5em;" type="checkbox" name="diariamente" v-model="diariamente">
                         </div>
+                        <!-- Dia da atividade -->
+                        <!-- OBS: Note que os elementos abaixo possuem a diretiva v-show -->
+                        <!-- Isto ocorre porque, se o usuário indicou periodicidade diária da atividade -->
+                        <!-- não é conveniente solicitar a ele a inserção de um dia específico para atividade -->
                         <label v-show="!diariamente" for="diasemana">Dia da semana:</label>
                         <select v-show="!diariamente" name="diasemana" id="" v-model="dia">
                             <option value="1">Segunda-feira</option>
@@ -17,20 +24,32 @@
                             <option value="4">Quinta-feira</option>
                             <option value="5">Sexta-feira</option>
                         </select>
+                        <!-- Horário inicial -->
                         <label>Horário inicial</label>
                         <input type="time" class="horainicio" v-model="inicio">
+                        <!-- Horário final -->
                         <label>Horário final</label>
                         <input type="time" class="horafim" v-model="fim">
+                        <!-- Cadastro da atividade -->
                         <button class="botao" @click="adicionar">Cadastrar</button>
                     </div>
                 </div>
 
+                <!-- Quadro de status da carga horária -->
                 <div style="display: flex; gap: 2em; font-size: 1em; border-radius: 1em; border: 2px black solid;" class="contagem">
+                    <!-- Carga horária devida provém de um dado salvo no localStorage do navegador do usuário -->
+                    <!-- Essa informação é carregada previamente na seção de dados do componente -->
                     <p>Carga horária devida: {{ cargaDevida }}</p>
+                    <!-- O campo abaixo é atualizado dinamicamente pela função "contarCarga", cujo nome explica sua função -->
                     <p>Carga horária cumprida: {{ contarCarga() }}</p>
+                    <!-- Os campos abaixo possuem a diretiva v-show para estabelecer condições para as diferentes situações -->
+                    <!-- de cumprimento de carga horária -->
                     <p style="color: green;" v-show="cargaDevida == contarCarga()">Situação: Ok.</p>
+                    <!-- Condição nº 1: Situação ok: a carga devida é igual à contagem total das atividades exercidas -->
                     <p style="color: red;" v-show="cargaDevida < contarCarga()">Situação: Carga excedente de {{ contarCarga() - cargaDevida }} horas.</p>
+                    <!-- Condição nº 2: Situação excedente: a carga cumprida excede o valor da carga devida -->
                     <p style="color: red;" v-show="cargaDevida > contarCarga()">Situação: Carga insuficiente: cumpra mais {{ cargaDevida - contarCarga() }} horas.</p>
+                    <!-- Condição nº 3: Situação insuficiente: a carga cumprida não atinge o valor da carga devida -->
                 </div>
 
                 <div class="quadro">
@@ -55,6 +74,14 @@
                             </tr>
                         </thead>
 
+                        <!-- Abaixo se encontram os espaços para atividade. -->
+                        <!-- Cada um possui a função abrirModal, que funciona caso o elemento possua -->
+                        <!-- a classe "preenchido" -->
+
+                        <!-- Ao inserirmos atividades no quadro, os espaços preenchidos -->
+                        <!-- possuirão uma classe identificadora da atividade, -->
+                        <!-- que possibilitará a associação entre os dados e a interface do quadro -->
+                        <!-- Dica: imagine esta identificação como se fosse uma "chave estrangeira" -->
                         <tbody>
                             <tr>
                                 <td class="corzinha">Seg</td>
@@ -148,22 +175,30 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
 
+        <!-- Modal de visualização, edição e exclusão de atividades -->
         <div id="modal-timeline" class="modal">
             <div id="modal-container">
+                <!-- Título da atividade -->
                 <h3></h3>
+                <!-- Descrição da atividade -->
                 <p></p>
                 <h4>Editar</h4>
+                <!-- Campo para novo título -->
                 <label for="titulo">Título</label>
                 <input type="text" name="titulo">
+                <!-- Campo para nova descrição -->
                 <label for="descricao">Descrição</label>
                 <textarea name="descricao" cols="30" rows="10"></textarea>
+                <!-- Botões relacionados ao CRUD -->
                 <div class="botoes">
+                    <!-- Edição -->
                     <button @click="editar">Salvar</button>
+                    <!-- Cancelamento (ou desistência) da operação -->
                     <button @click="sumir">Fechar</button>
+                    <!-- Exclusão -->
                     <button @click="excluir">Excluir</button>
                 </div>
             </div>
@@ -175,25 +210,42 @@
             name: "MainPage",
             data() {
                 return {
+                    /* ------------------------------------------------------------------------ */
+                    /* Dados provenientes dos campos do formulário */
                     titulo: "",
                     descricao: "",
                     dia: "1",
                     inicio: "",
                     fim: "",
                     diariamente: "",
+                    /* ------------------------------------------------------------------------ */
+                    /* Indicação da atividade sendo manipulada (este dado é utilizado, como exemplo,
+                    nas operações de edição exclusão. Dessa forma, o sistema sabe qual atividade manipular) */
                     atividadeSelecionada: "",
+                    /* Lista de atividades: provavelmente o elemento mais importante para o funcionamento do
+                    sistema */
                     listaAtividades: [],
+                    /* Auto incremento: controla o valor do ID da atividade */
                     autoIncremento: 0,
+                    /* Carga devida: carregamento da carga horária do usuário, proveniente do dado
+                    salvo em localStorage no momento do cadastro */
                     cargaDevida: localStorage['cargahoraria'],
+                    /* Horários possíveis para o início de uma atividade: lista utilizada para verificação 
+                    da validade dos horários inseridos nos campos de cadastro de atividade */
                     horariosPossiveisInicio: [
                         730, 815, 900, 1000, 1045, 1330, 1415, 1500, 1600, 1645, 1900, 1950, 2050, 2140
                     ],
+                    /* Horários possíveis para o fim de uma atividade: lista utilizada para verificação 
+                    da validade dos horários inseridos nos campos de cadastro de atividade */
                     horariosPossiveisFim: [
                         815, 900, 945, 1045, 1130, 1415, 1500, 1545, 1645, 1730, 1950, 2040, 2140, 2230
                     ]
                 }
             },       
 
+            /* Referente ao ciclo de vida do componente, antes de carregar a página, o sistema verifica
+            se o usuário possui o cadastro. Isso é necessário, pois o sistema precisa ter a informação
+            da carga horária do usuário */
             beforeMount () {
                 if (localStorage.getItem('cargahoraria') == undefined) {
                     alert('ATENÇÃO! Realize seu cadastro antes de acessar o quadro.');
@@ -202,23 +254,56 @@
             },
 
             methods: {
+                /* adicionar: Método para adicionar atividade ao quadro */
+                /* Funções: Verificar validade dos campos enviados, adição da atividade
+                na lista de atividades e chamada da função para "desenhar" atividade no quadro */
                 adicionar() {
-                    if (!(this.dia) || !(this.titulo) || !(this.descricao)) { // if (condição não fake)
+                    if (!(this.dia) || !(this.titulo) || !(this.descricao)) { 
+                        /* Verificação de campos obrigatórios */
                         alert('Olá parceiro!! Infelizmente você deve inserir todos os itens para que o sistema funcione :)');
                         return;
                     }
 
-                    if (parseInt(this.inicio.replace(':', '')) > parseInt(this.fim.replace(':', ''))) {
+                    if (parseInt(this.inicio.replace(':', '')) > parseInt(this.fim.replace(':', ''))) { 
+                        /* Garantia de que o horário de fim não antecede o horário de início */
                         alert('Ei amigo!!!!! Você está invertendo a ordem de seus horários. Verifique os dados e INTRODUZA novamente.');
                         return;
                     }
 
                     if (!(this.horariosPossiveisInicio.includes(parseInt(this.inicio.replace(':', ''))) || this.horariosPossiveisFim.includes(parseInt(this.fim.replace(':', ''))))) {
+                        /* Garantia de que os horários de início e fim são válidos perante as regras de negócio do sistema */
+                        /* Exemplo de horário de início válido: 07:30 */
+                        /* Exemplo de horário de início inválido: 07:00 */
                         alert('ATENÇÃO! Horário não permitido.');
                         return;
-                }
+                    }
 
-                let atividadesDoDia = this.listaAtividades.filter((atividade) => atividade.dia == this.dia);
+                
+
+                let atividadesDoDia;
+
+                if (!this.diariamente) {
+                    /* Filtro da lista de atividades, filtrando apenas atividades correspondentes
+                    ao dia em que se deseja inserir uma atividade */
+                    atividadesDoDia = this.listaAtividades.filter((atividade) => atividade.dia == this.dia);
+                } else {
+                    /* Verificação deve ocorrer entre todas as atividades, afinal, a atividade
+                    ocupará todos os dias */
+                    atividadesDoDia = this.listaAtividades;
+                }
+                
+                /* A verificação de interseção de horário de atividades se dá por meio da lógica de conjuntos:
+                Uma atividade A possui um horário inicial e um horário final.
+                Entre um horário inicial e um horário final, existem diversos minutos que uma atividade ocupa.
+                Sendo assim, essa função gera, a partir da lista de atividades do dia, o conjunto de minutos
+                que cada atividade ocupa.
+                Para verificar interseção de horários de atividades, basta comparar o conjunto de minutos
+                da atividade da inserção com o conjunto de minutos das atividades do dia, verificando se
+                existe qualquer igualdade de minutos */
+
+                /* --------------------------------------------------- */
+                /* Geração de minutos das atividades JÁ CADASTRADAS */
+
                 let minutosDeCadaAtividadeDoDia = atividadesDoDia.map((atividade) => {
                     let minutoInicial = parseInt(atividade.inicio.replace(':', ''));
                     let minutoFinal = parseInt(atividade.fim.replace(':', ''));
@@ -236,6 +321,11 @@
                     return listaMinutos;
                 });
 
+                /* --------------------------------------------------- */
+
+                /* --------------------------------------------------- */
+                /* Geração de minutos da atividade A SER INSERIDA */
+
                 let minutosDaAtividade = []
 
                 let minutoInicial = parseInt(this.inicio.replace(':', ''));
@@ -249,16 +339,25 @@
                     minutosDaAtividade.push(minuto);
                 }
 
-                for (let minuto of minutosDaAtividade) {
-                    for (let minutos of minutosDeCadaAtividadeDoDia) {
-                        if (minutos.includes(minuto)) {
+                /* --------------------------------------------------- */
+
+                /* Abaixo está a lógica para verificação de interseção */
+
+                for (let minuto of minutosDaAtividade) { /* Para cada minuto da atividade a ser inserida */
+                    for (let minutos of minutosDeCadaAtividadeDoDia) { /* Para cada lista de minutos das atividades do dia */
+                        if (minutos.includes(minuto)) { /* Verificar se o minuto está na lista */
                             alert('Ei amigo!!!!! Você está intercedendo a ordem de seus horários. Verifique os dados e introduza novamente.');
                             return;
                         }
                     }
                 }
 
+                /* A partir desta linha, a atividade já considerada válida. Portanto, abaixo, atualizamos
+                a variável de auto incremento que controla a atribuição de identificadores para as atividades */
+
                 this.autoIncremento++;
+
+                /* Inserção da atividade na lista de atividades: */
 
                 this.listaAtividades.push({
                     id: this.autoIncremento,
@@ -269,6 +368,8 @@
                     fim: this.fim,
                     diariamente: this.diariamente
                 });
+
+                /* Chamada da função para desenhar na interface do quadro de horários: */
 
                 this.desenhar(this.autoIncremento);
             },
@@ -296,12 +397,11 @@
                         elementos.push(document.querySelector(`table tbody tr:nth-child(${atividade.dia}) td:nth-child(${e})`));
                     });
                 }
-                
 
                 for (let elemento of elementos) {
                     elemento.textContent = atividade.titulo;
                     elemento.classList.add('preenchido');
-                    elemento.classList.add(`atividade-${idAtividade}`);
+                    elemento.classList.add(`atividade-${idAtividade}`); // Atribuição de identificador
                 }
             },
             apagar(idAtividade) {
@@ -333,24 +433,24 @@
                     elemento.textContent = "";
                     elemento.classList.remove('preenchido');
                     elemento.classList.remove(`atividade-${idAtividade}`);
-                }
+                } // Faz o contrário da função desenhar
             },
             abrirModal(evento) {
-                let elementoClicado = evento.srcElement;
+                let elementoClicado = evento.srcElement; // Caminho para identificação do elemento
 
-                let classe = elementoClicado.classList.value.split(' ').find(c => (/^atividade-/).test(c));
+                let classe = elementoClicado.classList.value.split(' ').find(c => (/^atividade-/).test(c)); // Extração de explicar
 
-                if (classe == undefined) {
+                if (classe == undefined) { // Verificação de atividade preenchida com classe de associação atividade-interface
                     return;
                 }
 
-                let idAtividade = classe.replace(/^atividade-(\d+)$/, "$1");
+                let idAtividade = classe.replace(/^atividade-(\d+)$/, "$1"); // Extrai da classe o número identificador
 
                 this.atividadeSelecionada = idAtividade;
 
-                document.querySelector('.modal').style.display = 'flex';
-                document.querySelector('.modal h3').textContent = 'Título: ' + this.listaAtividades.find(a => a != undefined && a.id == idAtividade).titulo;
-                document.querySelector('.modal p').textContent = 'Descrição: ' + this.listaAtividades.find(a => a != undefined && a.id == idAtividade).descricao;
+                document.querySelector('.modal').style.display = 'flex'; // Aparecer
+                document.querySelector('.modal h3').textContent = 'Título: ' + this.listaAtividades.find(a => a != undefined && a.id == idAtividade).titulo; // Inserção do título na interface de visualização
+                document.querySelector('.modal p').textContent = 'Descrição: ' + this.listaAtividades.find(a => a != undefined && a.id == idAtividade).descricao; // Inserção da descrição na interface de visualização
             },
             sumir() {
                 document.querySelector('.modal').style.display = 'none';
@@ -359,8 +459,8 @@
                 let atividade = this.listaAtividades.find(a => a != undefined && a.id == this.atividadeSelecionada);
                 atividade.titulo = document.getElementsByName('titulo')[0].value;
                 atividade.descricao = document.getElementsByName('descricao')[0].value;
-                document.getElementsByName('titulo')[0].value = "";
-                document.getElementsByName('descricao')[0].value = "";
+                document.getElementsByName('titulo')[0].value = ""; // Limpar valores dos campos
+                document.getElementsByName('descricao')[0].value = ""; // Limpar valores dos campos
                 this.sumir();
                 this.desenhar(this.atividadeSelecionada);
             },
@@ -370,26 +470,20 @@
                 }
 
                 this.sumir();
-                this.apagar(this.atividadeSelecionada);
+                this.apagar(this.atividadeSelecionada); // Apagar da interface
 
+                // Apagar da lista
                 delete this.listaAtividades[this.listaAtividades.indexOf(this.listaAtividades.find(a => a != undefined && a.id == this.atividadeSelecionada))];
             },
             contarCarga() {
-
                 let horasCumpridasSemanalmente = 0;
 
                 this.listaAtividades.forEach(atividade => {
-                    // let inicio = parseInt(atividade.inicio.replace(':', ''));
-                    // let fim = parseInt(atividade.fim.replace(':', ''));
-
                     let [horaInicio, minutoInicio] = atividade.inicio.split(':').map(n => parseInt(n));
                     let [horaFim, minutoFim] = atividade.fim.split(':').map(n => parseInt(n));
 
                     let minutosInicio = horaInicio * 60 + minutoInicio;
                     let minutosFim = horaFim * 60 + minutoFim;
-
-                    console.log(minutosInicio);
-                    console.log(minutosFim);
 
                     horasCumpridasSemanalmente += (minutosFim - minutosInicio) / 60;
                 });
